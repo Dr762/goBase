@@ -1,0 +1,2 @@
+# goBase
+Basic GoLang staff
