@@ -1,11 +1,10 @@
-package main
+package lissajous
 
 import (
 	"image"
 	"image/color"
 	"image/gif"
 	"io"
-	"os"
 	"math/rand"
 	"math"
 )
@@ -16,10 +15,10 @@ const (
 	blackIndex = 1 // next color in palete
 )
 
-func main() {
-	lissajous(os.Stdout)
-
-}
+//func main() {
+//	lissajous(os.Stdout)
+//
+//}
 
 func lissajous(out io.Writer) {
 	const (

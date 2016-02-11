@@ -6,10 +6,12 @@ import (
 	"strings"
 	"bufio"
 	"io/ioutil"
+
 )
 //hello world
 //echo arguments
 //find duplicate lines
+
 func main() {
 	fmt.Println("Ok,let's GO")
 
@@ -21,6 +23,9 @@ func main() {
 	fmt.Println(strings.Join(os.Args[1:], " "))
 	//duplicatesFilesInput()
 	duplicatesFilesOnly()
+
+
+	fmt.Println("pure file name of the second   arg ", basename(os.Args[2]))
 }
 
 
@@ -43,6 +48,8 @@ func echo2() {
 	}
 	fmt.Println(s)
 }
+
+
 
 //find duplicate lines in input
 
@@ -94,4 +101,14 @@ func duplicatesFilesOnly() {
 			fmt.Printf("%d\t%s\n", n, line)
 		}
 	}
+}
+
+//remove string and file name
+func basename(s string) string{
+	slash:=strings.LastIndex(s,"/") //-1 if not found
+	s = s[slash+1:]
+	if dot :=strings.LastIndex(s,"."); dot>=0{
+		s = s[:dot]
+	}
+	return s
 }
