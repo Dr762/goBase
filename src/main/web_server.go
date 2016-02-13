@@ -1,12 +1,13 @@
 package main
 
 import (
+	"lissajous"
 	"fmt"
 	"log"
 	"net/http"
 	"sync"
 
-	//"lissajous"
+
 )
 
 var count int
@@ -15,7 +16,7 @@ func main() {
 
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/count", counter)
-//	http.HandleFunc("/lissajous", func(w http.ResponseWriter, r *http.Request) {lissajous.})
+	http.HandleFunc("/lissajous", func(w http.ResponseWriter, r *http.Request) {lissajous.Lissajous(w)})
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 
 }
