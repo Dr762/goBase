@@ -15,10 +15,6 @@ const (
 	blackIndex = 1 // next color in palete
 )
 
-//func main() {
-//	lissajous(os.Stdout)
-//
-//}
 
 func Lissajous(out io.Writer) {
 	const (

@@ -15,6 +15,12 @@ type Movie struct {
 
 func main() {
 	jsonmarshaller()
+
+	f:=squares()
+	fmt.Println(f())
+	fmt.Println(f())
+	fmt.Println(f())
+
 }
 
 
@@ -34,4 +40,13 @@ func jsonmarshaller() {
 	}
 
 	fmt.Printf("%s\n",data)
+}
+
+//isn't it a closure?
+func squares() func() int{
+	var x int
+	return func() int {
+		x++
+		return x*x
+	}
 }
