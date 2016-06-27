@@ -1,7 +1,7 @@
 package main
 import (
 
-	"github"
+	"github.com/github"
 
 	"os"
 	"log"

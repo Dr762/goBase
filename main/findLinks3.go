@@ -1,7 +1,7 @@
 package main
 import (
 	"fmt"
-	"links"
+	"github/links"
 	"log"
 	"os"
 )

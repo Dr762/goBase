@@ -1,7 +1,8 @@
 package main
 
 import (
-	"geometry"
+
+"github.com/geometry"
 	"fmt"
 	"image/color"
 )

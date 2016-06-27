@@ -1,10 +1,9 @@
 package main
-
 import (
 	"fmt"
-	"links"
 	"log"
 	"os"
+	"github.com/github"
 )
 
 //also 20 calls but less repeated links

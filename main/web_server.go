@@ -1,7 +1,7 @@
 package main
 
 import (
-	"lissajous"
+	"github.com/lissajous"
 	"fmt"
 	"log"
 	"net/http"
