@@ -9,3 +9,4 @@ Steps before clone and run
 4) clone from git in github.com
 5)*for idea: open project from github.com folder
 if you clone via idea parent folder must be : goBase/src/github.com/
+6) when all set run make get
