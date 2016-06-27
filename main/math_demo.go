@@ -2,7 +2,7 @@ package main
 
 import (
 
-"github.com/geometry"
+"github.com/goBase/geometry"
 	"fmt"
 	"image/color"
 )

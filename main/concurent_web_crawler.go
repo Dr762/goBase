@@ -3,7 +3,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"github.com/github"
+	"github.com/goBase/links"
 )
 
 //also 20 calls but less repeated links

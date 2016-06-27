@@ -1,7 +1,7 @@
 package main
 import (
 	"fmt"
-	"github/links"
+	"github.com/goBase/links"
 	"log"
 	"os"
 )

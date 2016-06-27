@@ -1,7 +1,7 @@
 package main
 import (
 
-	"github.com/github"
+	"github.com/goBase/github"
 
 	"os"
 	"log"

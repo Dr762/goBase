@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/lissajous"
+	"github.com/goBase/lissajous"
 	"fmt"
 	"log"
 	"net/http"
