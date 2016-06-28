@@ -1,20 +1,15 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
-	"bufio"
-	"io/ioutil"
-
 )
-//hello world
-//echo arguments
-//find duplicate lines
 
 func main() {
 	fmt.Println("Ok,let's GO")
-
 
 	echo()
 	echo2()
@@ -24,10 +19,8 @@ func main() {
 	//duplicatesFilesInput()
 	duplicatesFilesOnly()
 
-
 	fmt.Println("pure file name of the second   arg ", basename(os.Args[2]))
 }
-
 
 func echo() {
 	var s, sep string
@@ -48,8 +41,6 @@ func echo2() {
 	}
 	fmt.Println(s)
 }
-
-
 
 //find duplicate lines in input
 
@@ -85,13 +76,13 @@ func countLines(f *os.File, counts map[string]int) {
 
 func duplicatesFilesOnly() {
 	counts := make(map[string]int)
-	for _, filename :=range os.Args[1:]{
-	   data,err:= ioutil.ReadFile(filename)
+	for _, filename := range os.Args[1:] {
+		data, err := ioutil.ReadFile(filename)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "dup2: %v\n", err)
 			continue
 		}
-		for _,line:=range strings.Split(string(data),"\n"){
+		for _, line := range strings.Split(string(data), "\n") {
 			counts[line]++
 		}
 	}
@@ -104,12 +95,11 @@ func duplicatesFilesOnly() {
 }
 
 //remove string and file name
-func basename(s string) string{
-	slash:=strings.LastIndex(s,"/") //-1 if not found
+func basename(s string) string {
+	slash := strings.LastIndex(s, "/") //-1 if not found
 	s = s[slash+1:]
-	if dot :=strings.LastIndex(s,"."); dot>=0{
+	if dot := strings.LastIndex(s, "."); dot >= 0 {
 		s = s[:dot]
 	}
 	return s
 }
-

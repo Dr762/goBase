@@ -8,5 +8,5 @@ Table of Contents
 - [Overview](#overview)
 
 Modules:
-- [Types](#types)
-- [QML](#qml)
+- [Geometry](#geometry)
+- [IssueReporter](#issue_reporter)
