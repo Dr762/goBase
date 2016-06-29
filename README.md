@@ -7,6 +7,7 @@ Steps before clone and run
 2) create subfolder bin,src,pkg
 3) for normnal goLang packaging via github create github.com
 4) clone from git in github.com
-5)*for idea: open project from github.com folder
-if you clone via idea parent folder must be : goBase/src/github.com/
-6) when all set run make get
+5) in idea create proejct for root dir(where src,bin and pkg)
+6) setup root where cloned from github
+7) setup project libraries to the root dir (e.g /home/abondar/goBase)
+7) when all set run make get

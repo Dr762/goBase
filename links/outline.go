@@ -18,7 +18,6 @@ func ShowTags(htmlDoc []byte) {
 		os.Exit(1)
 	}
 	outline(nil, doc)
-
 }
 
 func outline(stack []string, n *html.Node) {
