@@ -1,4 +1,4 @@
-package main
+package basic
 
 import (
 	"bufio"
@@ -8,45 +8,10 @@ import (
 	"strings"
 )
 
-func main() {
-	fmt.Println("Ok,let's GO")
-
-	echo()
-	echo2()
-
-	fmt.Println("argument list v3")
-	fmt.Println(strings.Join(os.Args[1:], " "))
-	//duplicatesFilesInput()
-	duplicatesFilesOnly()
-
-	fmt.Println("pure file name of the second   arg ", basename(os.Args[2]))
-}
-
-func echo() {
-	var s, sep string
-	fmt.Println("argument list")
-	for i := 1; i < len(os.Args); i++ {
-		s += sep + os.Args[i]
-		sep = " "
-	}
-	fmt.Println(s)
-}
-
-func echo2() {
-	s, sep := "", ""
-	fmt.Println("argument list v2")
-	for _, arg := range os.Args[1:] {
-		s += sep + arg
-		sep = " "
-	}
-	fmt.Println(s)
-}
-
 //find duplicate lines in input
 
-func duplicatesFilesInput() {
+func DuplicatesFilesInput(files []string) {
 	counts := make(map[string]int)
-	files := os.Args[1:]
 	if len(files) == 0 {
 		countLines(os.Stdin, counts)
 	} else {
@@ -74,9 +39,9 @@ func countLines(f *os.File, counts map[string]int) {
 	input.Err()
 }
 
-func duplicatesFilesOnly() {
+func DuplicatesFilesOnly(files []string) {
 	counts := make(map[string]int)
-	for _, filename := range os.Args[1:] {
+	for _, filename := range files {
 		data, err := ioutil.ReadFile(filename)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "dup2: %v\n", err)

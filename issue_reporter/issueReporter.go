@@ -71,7 +71,7 @@ const (
 	ConsoleMode      = "console_mode"
 )
 
-func SearchIssues(terms []string, mode Mode) IssuesSearchResult {
+func SearchIssues(terms []string, mode Mode) (*IssuesSearchResult, error) {
 	q := url.QueryEscape(strings.Join(terms, " "))
 	resp, err := http.Get(IssuesURL + "?q=" + q)
 	if err != nil {
@@ -93,15 +93,15 @@ func SearchIssues(terms []string, mode Mode) IssuesSearchResult {
 	switch mode {
 	case ConsoleMode:
 		if err := report.Execute(os.Stdout, result); err != nil {
-			return err
+			return nil, err
 		}
 	case HTMLMode:
 		if err := issueList.Execute(os.Stdout, result); err != nil {
-			return err
+			return nil, err
 		}
 	}
 
-	return nil
+	return &result, nil
 
 }
 

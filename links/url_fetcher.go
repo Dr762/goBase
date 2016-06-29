@@ -12,27 +12,28 @@ import (
 
 //wget on go
 func FetchToConsole(urls []string) ([]byte, error) {
+	var b []byte
 	for _, url := range urls {
 		resp, err := http.Get(url)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
 			return []byte{}, err
 		}
-		b, err := ioutil.ReadAll(resp.Body)
+		b, err = ioutil.ReadAll(resp.Body)
 		resp.Body.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s %v\n", url, err)
 			return []byte{}, err
 		}
 		fmt.Printf("%s", b)
-		return b, nil
-	}
 
+	}
+	return b, nil
 }
 
-func FetchToFile(urls []string) (filename string, fileLen int64, err error) {
+func FetchToFile(url string) (filename string, fileLen int64, err error) {
 
-	resp, err := http.Get(urls)
+	resp, err := http.Get(url)
 	if err != nil {
 		return "", 0, err
 	}

@@ -28,11 +28,11 @@ func (p *Point) ScaleBy(factor float64) {
 
 }
 
-func (p *Point) Add(q Point) Point {
+func (p Point) Add(q Point) Point {
 	return Point{p.X + q.X, p.Y + q.Y}
 }
 
-func (p *Point) Sub(q Point) Point {
+func (p Point) Sub(q Point) Point {
 	return Point{p.X - q.X, p.Y - q.Y}
 }
 
@@ -60,31 +60,31 @@ func (path Path) Distance() float64 {
 	return sum
 }
 
-func GeometryDemo(x1 int, y1 int, x2 int, y2 int) {
+func GeometryDemo(x1 float64, y1 float64, x2 float64, y2 float64) {
 	p := Point{x1, y1}
 	q := Point{x2, y2}
 
-	fmt.Fprintln("Distance from x1,y1 to x2,y2 %v", p.PointDistance(q))
+	fmt.Sprintln("Distance from x1,y1 to x2,y2 %e", p.PointDistance(q))
 	l := Point{1, 1}
 	s := Point{2, 2}
 	perim := Path{p, q, l, s}
 
-	fmt.Fprintln("Permiter for p,q and 1,1 and 2,2 points %v", perim.Distance())
+	fmt.Sprintln("Permiter for p,q and 1,1 and 2,2 points %e", perim.Distance())
 
 	(&p).ScaleBy(6)
-	fmt.Fprintln("Scale p point  %v", p)
+	fmt.Sprintln("Scale p point  %e", p)
 
 	blue := color.RGBA{255, 0, 0, 255}
 	cp := ColoredPoint{p, blue}
-	fmt.Fprintln("Colored point  %v", cp.Point.X)
+	fmt.Sprintln("Colored point  %e", cp.Point.X)
 
 	p1 := p.Add(q)
-	fmt.Fprintln("Add p to q  %v", p1)
+	fmt.Sprintln("Add p to q  %e", p1)
 
 	p2 := p.Sub(q)
-	fmt.Fprintln("Substract p from q  %v", p2)
+	fmt.Sprintln("Substract p from q  %e", p2)
 
 	perim.TranslateBy(q, true)
-	fmt.Fprintln("Offset perim to q  %v", perim)
+	fmt.Sprintln("Offset perim to q  %e", perim)
 
 }

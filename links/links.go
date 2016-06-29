@@ -4,14 +4,16 @@ import (
 	"golang.org/x/net/html"
 	"os"
 
+	"bytes"
 	"fmt"
 	"log"
 	"net/http"
 )
 
-func FindLinks(doc []byte) ([]string, error) {
+func FindLinks(htmlDoc []byte) ([]string, error) {
 
-	doc, err := html.Parse(doc)
+	buf := bytes.NewBuffer(htmlDoc)
+	doc, err := html.Parse(buf)
 	if err != nil {
 		fmt.Errorf("Error finding links: %v\n", err)
 		return []string{}, err
@@ -103,7 +105,7 @@ func FindLinksConcurent() {
 
 func crawl(url string) []string {
 	fmt.Println(url)
-	list, err := Extract(url)
+	list, err := extract(url)
 	if err != nil {
 		log.Print(err)
 	}

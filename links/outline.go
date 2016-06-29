@@ -4,13 +4,15 @@ import (
 	"golang.org/x/net/html"
 	"os"
 
+	"bytes"
 	"fmt"
 )
 
 //show a stack of tags
-func ShowTags(htmDoc []byte) {
+func ShowTags(htmlDoc []byte) {
 
-	doc, err := html.Parse(htmDoc)
+	buf := bytes.NewBuffer(htmlDoc)
+	doc, err := html.Parse(buf)
 	if err != nil {
 		fmt.Errorf("Error showing tags %v\n", err)
 		os.Exit(1)
@@ -32,9 +34,9 @@ func outline(stack []string, n *html.Node) {
 
 var depth int
 
-func ShowTagsTree(htmDoc []byte) {
-
-	doc, err := html.Parse(htmDoc)
+func ShowTagsTree(htmlDoc []byte) {
+	buf := bytes.NewBuffer(htmlDoc)
+	doc, err := html.Parse(buf)
 
 	if err != nil {
 		fmt.Errorf("Error showing tags %v\n", err)
