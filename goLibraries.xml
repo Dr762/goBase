@@ -1,0 +1,9 @@
+<application>
+  <component name="GoLibraries">
+    <option name="urls">
+      <list>
+        <option value="file:///usr/lib/go-1.6" />
+      </list>
+    </option>
+  </component>
+</application>
