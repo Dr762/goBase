@@ -10,8 +10,15 @@ import (
 	"time"
 )
 
+type Mode string
+
+const (
+	FetchMode Mode = "fetch"
+	LinksMode Mode = "links"
+)
+
 //wget on go
-func FetchToConsole(urls []string) ([]byte, error) {
+func FetchToConsole(urls []string, mode Mode) ([]byte, error) {
 	var b []byte
 	for _, url := range urls {
 		resp, err := http.Get(url)
@@ -25,7 +32,10 @@ func FetchToConsole(urls []string) ([]byte, error) {
 			fmt.Fprintf(os.Stderr, "fetch: reading %s %v\n", url, err)
 			return []byte{}, err
 		}
-		fmt.Printf("%s", b)
+
+		if mode == FetchMode {
+			fmt.Printf("%s", b)
+		}
 
 	}
 	return b, nil

@@ -14,21 +14,19 @@ var verbose = flag.Bool("v", false, "show verbose progress messages")
 var sema = make(chan struct{}, 20) //counting semafor for concurency release
 var done = make(chan struct{})
 
-func DirectoryTraversal() {
+func DirectoryTraversal(dirs []string) {
 
 	//Determine inital directories
-	flag.Parse()
-	roots := flag.Args()
-	if len(roots) == 0 {
-		roots = []string{"."}
+	if len(dirs) == 0 {
+		fmt.Println("No dirs found")
 	}
 
 	//Traverse the file tree in parallel
 	fileSizes := make(chan int64)
 	var n sync.WaitGroup
-	for _, root := range roots {
+	for _, dir := range dirs {
 		n.Add(1)
-		go walkDir(root, &n, fileSizes)
+		go walkDir(dir, &n, fileSizes)
 	}
 	go func() {
 		n.Wait()

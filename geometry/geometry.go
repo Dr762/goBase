@@ -36,7 +36,6 @@ func (p Point) Sub(q Point) Point {
 	return Point{p.X - q.X, p.Y - q.Y}
 }
 
-//move all points on offsetffff
 func (path Path) TranslateBy(offset Point, add bool) {
 	var op func(p, q Point) Point
 	if add {
@@ -64,27 +63,27 @@ func GeometryDemo(x1 float64, y1 float64, x2 float64, y2 float64) {
 	p := Point{x1, y1}
 	q := Point{x2, y2}
 
-	fmt.Sprintln("Distance from x1,y1 to x2,y2 %e", p.PointDistance(q))
+	fmt.Printf("Distance from x1,y1 to x2,y2 %g\n", p.PointDistance(q))
 	l := Point{1, 1}
 	s := Point{2, 2}
 	perim := Path{p, q, l, s}
 
-	fmt.Sprintln("Permiter for p,q and 1,1 and 2,2 points %e", perim.Distance())
+	fmt.Printf("Permiter for p,q and 1,1 and 2,2 points %g\n", perim.Distance())
 
 	(&p).ScaleBy(6)
-	fmt.Sprintln("Scale p point  %e", p)
+	fmt.Printf("Scale p point  %g\n", p)
 
 	blue := color.RGBA{255, 0, 0, 255}
 	cp := ColoredPoint{p, blue}
-	fmt.Sprintln("Colored point  %e", cp.Point.X)
+	fmt.Printf("Colored point  %g\n", cp.Point.X)
 
 	p1 := p.Add(q)
-	fmt.Sprintln("Add p to q  %e", p1)
+	fmt.Printf("Add p to q  %g\n", p1)
 
 	p2 := p.Sub(q)
-	fmt.Sprintln("Substract p from q  %e", p2)
+	fmt.Printf("Substract p from q  %g\n", p2)
 
 	perim.TranslateBy(q, true)
-	fmt.Sprintln("Offset perim to q  %e", perim)
+	fmt.Printf("Offset perim to q  %g\n", perim)
 
 }
