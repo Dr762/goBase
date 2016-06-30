@@ -9,7 +9,7 @@ import (
 
 //server client
 func Netcat() {
-	conn, err := net.Dial("tcp", "localhost:8000")
+	conn, err := net.Dial("tcp", "localhost:8090")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,7 +25,7 @@ func mustCopy(dst io.Writer, src io.Reader) {
 }
 
 func NetcatChannel() {
-	conn, err := net.Dial("tcp", "localhost:8000")
+	conn, err := net.Dial("tcp", "localhost:8090")
 	if err != nil {
 		log.Fatal(err)
 	}

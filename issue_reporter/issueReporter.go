@@ -67,8 +67,8 @@ type User struct {
 type Mode string
 
 const (
-	HTMLMode    Mode = "html_mode"
-	ConsoleMode      = "console_mode"
+	HTMLMode    Mode = "html"
+	ConsoleMode Mode = "console"
 )
 
 func SearchIssues(terms []string, mode Mode) (*IssuesSearchResult, error) {

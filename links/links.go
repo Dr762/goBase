@@ -83,7 +83,7 @@ func FindLinksConcurent() {
 	for i := 0; i < 20; i++ {
 		go func() {
 			for link := range unseenLinks {
-				foundLinks := crawl(link)
+				foundLinks := Crawl(link)
 				go func() {
 					worklist <- foundLinks
 				}()
@@ -103,7 +103,7 @@ func FindLinksConcurent() {
 
 }
 
-func crawl(url string) []string {
+func Crawl(url string) []string {
 	fmt.Println(url)
 	list, err := extract(url)
 	if err != nil {
