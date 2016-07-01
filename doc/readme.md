@@ -94,8 +94,8 @@ Shows list of issues in htmll or list mode.
 run: ./main issues mode repo isssue 
 
 mode:
-    -HTML 
-    -Console
+    - HTML 
+    - Console
 
 **Types**
 ```yaml
