@@ -4,12 +4,12 @@ import (
 	"image"
 	"image/color"
 	"image/png"
+	"io"
 	"math/cmplx"
-	"os"
 )
 
 //draw a fractal
-func DrawFractal() {
+func DrawFractal(out io.Writer) {
 
 	const (
 		xmin, ymin, xmax, ymax = -2, -2, +2, +2
@@ -28,7 +28,7 @@ func DrawFractal() {
 		}
 	}
 
-	png.Encode(os.Stdout, img)
+	png.Encode(out, img)
 }
 
 func mandelbrot(z complex128) color.Color {

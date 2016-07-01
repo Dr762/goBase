@@ -3,9 +3,7 @@ package basic
 import (
 	"bufio"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"strings"
 )
 
 //find duplicate lines in input

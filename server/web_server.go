@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"github.com/goBase/basic"
 	"github.com/goBase/lissajous"
 	"log"
 	"net/http"
@@ -16,6 +17,7 @@ func RunWebServer() {
 	http.HandleFunc("/", simpleHandler)
 	http.HandleFunc("/count", counter)
 	http.HandleFunc("/lissajous", func(w http.ResponseWriter, r *http.Request) { lissajous.Lissajous(w) })
+	http.HandleFunc("/fractal", func(w http.ResponseWriter, r *http.Request) { basic.DrawFractal(w) })
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 
 }

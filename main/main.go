@@ -70,10 +70,6 @@ func basicRun(args []string) {
 		basic.DuplicatesFilesInput(os.Args[3:])
 	}
 
-	if argMap["fractal"] {
-		basic.DrawFractal()
-	}
-
 	if argMap["json"] {
 		basic.Jsonmarshaller()
 	}
