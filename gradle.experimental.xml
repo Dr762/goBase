@@ -1,0 +1,6 @@
+<application>
+  <component name="GradleExperimentalSettings">
+    <option name="SELECT_MODULES_ON_PROJECT_IMPORT" value="true" />
+    <option name="MAX_MODULE_COUNT_FOR_SOURCE_GEN" value="2" />
+  </component>
+</application>
