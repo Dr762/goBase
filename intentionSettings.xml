@@ -1,0 +1,6 @@
+<application>
+  <component name="IntentionManagerSettings">
+    <ignoreAction name="Java/Declaration/Unimplement Interface/Class" />
+    <ignoreAction name="Java/Declaration/Implement abstract class or interface" />
+  </component>
+</application>
