@@ -1,7 +1,0 @@
-<application>
-  <component name="FindSettings">
-    <option name="customScope" value="File '/home/abondar/IdeaProjects/springDemo/SpringHTTPInvoker/src/main/webapp/WEB-INF/spring/root-context.xml'" />
-    <option name="defaultScopeName" value="File '/home/abondar/IdeaProjects/springDemo/SpringHTTPInvoker/src/main/webapp/WEB-INF/spring/root-context.xml'" />
-    <option name="SEARCH_SCOPE" value="File '/home/abondar/IdeaProjects/springDemo/SpringHTTPInvoker/src/main/webapp/WEB-INF/spring/root-context.xml'" />
-  </component>
-</application>
