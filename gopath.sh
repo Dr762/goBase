@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [ "$GOENV" != "goBase" ]; then
+if [ "$GOENV" != "GoBase" ]; then
     if [ -z "$GO_ORIG_PATH" ]; then
         export GO_ORIG_PATH=$PATH
     fi
