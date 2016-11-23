@@ -6,8 +6,8 @@ if [ "$GOENV" != "goBase" ]; then
         export GO_ORIG_PATH=$PATH
     fi
 
-    export GOENV=goBase
-    export GOPATH="$HOME/goBase"
+    export GOENV=GoBase
+    export GOPATH="$HOME/GoBase"
     export PATH="$GO_ORIG_PATH:$GOPATH/bin"
     export GO15VENDOREXPERIMENT=1
 fi
