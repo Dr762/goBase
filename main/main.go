@@ -48,8 +48,8 @@ func main() {
 		linksRun(*fetch)
 
 	case web.FullCommand():
-
 		serverRun(*servers)
+
 	}
 
 	os.Exit(0)
@@ -240,6 +240,10 @@ func serverRun(args []string) {
 
 	if argMap["client-concurent"] {
 		server.NetcatChannel()
+	}
+
+	if argMap["rest"] {
+		server.RunRestServer()
 	}
 
 }
