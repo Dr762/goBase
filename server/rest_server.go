@@ -1,62 +1,140 @@
 package server
 
 import (
-	"fmt"
+	"encoding/json"
+	"github.com/GoBase/db"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"github.com/gorilla/mux"
-	"github.com/GoBase/model"
-	"encoding/json"
 	"strconv"
 )
+
+var base = db.Connect()
 
 func RunRestServer() {
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", index)
-	router.HandleFunc("/getPerson/{person_id}", getPerson)
-	router.HandleFunc("/insertPerson",insertPerson)
-	router.HandleFunc("/getJob/{job_id}",getJob)
-	router.HandleFunc("/getJobForPerson/{job_id,person_id}",getJobForPerson)
-	router.HandleFunc("/insertJob",insertJob)
-	
+	router.HandleFunc("/getPerson/{person_id}", getPerson).Methods("GET")
+	router.HandleFunc("/getPersons", getPersons).Methods("GET")
+	router.HandleFunc("/insertPerson", insertPerson).Methods("POST")
+	router.HandleFunc("/getJob/{job_id}", getJob).Methods("GET")
+	router.HandleFunc("/getJobForPerson/{person_id}", getJobForPerson).Methods("GET")
+	router.HandleFunc("/insertJob", insertJob).Methods("POST")
+
 	log.Fatal(http.ListenAndServe(":8080", router))
+
 }
 
-func index(w http.ResponseWriter, r *http.Request){
-	fmt.Fprintln(w,"Hiiii")
+func index(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode("Hiiii")
 }
 
 func getPerson(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	person_id := vars["person_id"]
 
-	personId,_ := strconv.Atoi(person_id)
-
-
-	person := model.Person{
-		Id: 1,
-		Name: "Alex",
-		PersonId: personId,
-		Admin:true,
+	personId, err := strconv.Atoi(person_id)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
 	}
 
-	json.NewEncoder(w).Encode(person)
+	person, err := db.GetPerson(base, personId)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		json.NewEncoder(w).Encode(person)
+	}
+
 }
 
-func insertPerson(w http.ResponseWriter, r *http.Request)  {
-//	json.NewEncoder(w).Encode()
+func getPersons(w http.ResponseWriter, r *http.Request) {
+
+	persons, err := db.GetPersons(base)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		json.NewEncoder(w).Encode(persons)
+	}
+
 }
 
-func getJob(w http.ResponseWriter, r *http.Request)  {
-	
+func insertPerson(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("name")
+
+	person_id := r.FormValue("person_id")
+	personId, err := strconv.Atoi(person_id)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	}
+
+	adm := r.FormValue("admin")
+	admin, err := strconv.ParseBool(adm)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	}
+
+	person := &db.Person{Name: name, PersonId: personId, Admin: admin}
+
+	id, err := db.InsertPerson(base, person)
+	person.Id = id
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		json.NewEncoder(w).Encode(person)
+	}
 }
 
-func getJobForPerson(w http.ResponseWriter, r *http.Request)  {
-	
+func getJob(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	job_id := vars["job_id"]
+
+	jobId, err := strconv.Atoi(job_id)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	}
+
+	job, err := db.GetJob(base, jobId)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		json.NewEncoder(w).Encode(job)
+	}
+}
+
+func getJobForPerson(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	person_id := vars["person_id"]
+
+	personId, err := strconv.Atoi(person_id)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	}
+
+	job, err := db.GetJobForPerson(base, personId)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		json.NewEncoder(w).Encode(job)
+	}
 }
 
 func insertJob(w http.ResponseWriter, r *http.Request) {
+	jobName := r.FormValue("job_name")
 
+	person_id := r.FormValue("person_id")
+	personId, err := strconv.Atoi(person_id)
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	}
+
+	job := &db.Job{JobName: jobName, PersonId: personId}
+
+	id, err := db.InsertJob(base, job)
+	job.Id = id
+	if err != nil {
+		json.NewEncoder(w).Encode(err.Error())
+	} else {
+		json.NewEncoder(w).Encode(job)
+	}
 }
-
