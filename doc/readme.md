@@ -173,6 +173,7 @@ server-type:
    - clock
    - echo
    - chat
+   - rest
 
 client-type: 
    - client
@@ -195,6 +196,16 @@ RunEchoServer - run echo server.
 
 RunChatServer - run chat server.
     Run: localhost:8090
+    
+RunRestServer - run rest server.
+    Run: localhost:8080
+    REST methods: 
+      - /getPerson/{person_id}, GET
+      - /getPersons, GET
+      - /insertPerson, POST
+      - /getJob/{job_id}, GET
+      - /getJobForPerson/{person_id}, GET
+      - /insertJob, POST
 
 Netcat - run tcp client
 
