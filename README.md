@@ -8,6 +8,6 @@ Steps before clone and run
 3. For normnal goLang packaging via github create github.com
 4. Clone from git in github.com
 5. Setup gopath to the dir with src bin pkg
-8. When all set do go get
+8. When all set do go get or go install(setup GOBIN to bin dir before you run)
 
 [API](doc/readme.md)
