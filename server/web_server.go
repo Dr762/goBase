@@ -2,8 +2,8 @@ package server
 
 import (
 	"fmt"
-	"github.com/GoBase/basic"
-	"github.com/GoBase/lissajous"
+	"github.com/abondar24/GoBase/basic"
+	"github.com/abondar24/GoBase/lissajous"
 	"log"
 	"net/http"
 	"sync"

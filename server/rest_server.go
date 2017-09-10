@@ -2,7 +2,7 @@ package server
 
 import (
 	"encoding/json"
-	"github.com/GoBase/db"
+	"github.com/abondar24/GoBase/db"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"

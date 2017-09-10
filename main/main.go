@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/GoBase/basic"
-	reporter "github.com/GoBase/issue_reporter"
-	"github.com/GoBase/links"
-	"github.com/GoBase/server"
+	"github.com/abondar24/GoBase/basic"
+	reporter "github.com/abondar24/GoBase/issue_reporter"
+	"github.com/abondar24/GoBase/links"
+	"github.com/abondar24/GoBase/server"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 
-	"github.com/GoBase/geometry"
+	"github.com/abondar24/GoBase/geometry"
 	"log"
 	"strconv"
 )
