@@ -13,18 +13,19 @@ Modules:
 - [Links](#links)
 - [Lissajous](#lissajous)
 - [Server](#server)
-
+- [Client](#client)
+- [Network](#network)
 
 Overview
 --------
 
-Bunch of demos from Kernigan's GoLang book. All is ran from console
+Bunch of demos for GoLang . All is ran from console
 
 Basic
 -----
 Some basic golanf staff
 
-Run: ./main basic demo
+Run: ./main basic <demo>
  
 demo:
    - defer
@@ -91,7 +92,7 @@ IssueReporter
 -------------
 Shows list of issues in htmll or list mode.
 
-run: ./main issues mode repo isssue 
+run: ./main issues <mode> <repo> <issue> 
 
 mode:
     - HTML 
@@ -126,7 +127,7 @@ SearchIssues - search from source in selected mode
 Links
 ---------
 Fetch data from url and parse it to get links
-run: ./main links action list<urls>
+run: ./main links <action> list<urls>
 
 action:
  - fetch-console
@@ -154,7 +155,7 @@ ShowTagsTree - outline tree of tags from the list of urls
 Lissajous
 ---------
 Creates a lissajous figures gif
-run: ./main web web-server. In browser localhost:8000/lissajous
+run: ./main server web-server. In browser localhost:8000/lissajous
 
 **Methods**
 ```yaml
@@ -164,9 +165,9 @@ Lissajous - create a gif
 Server
 ------
 Runs different servers
-run: ./main web server-type
+run: ./main server <server-type>
 
-If you want to use chat server :  ./main web chat client-type
+If you want to use chat server :  ./main server chat client-type
 
 server-type:
    - web-server
@@ -174,10 +175,9 @@ server-type:
    - echo
    - chat
    - rest
-
-client-type: 
-   - client
-   - concurent client
+   - daytime-tcp
+   - daytime-udp
+   - multi
 
 **Methods**
 ```yaml
@@ -207,10 +207,62 @@ RunRestServer - run rest server.
       - /getJobForPerson/{person_id}, GET
       - /insertJob, POST
 
-Netcat - run tcp client
+RunDaytimeTcpServer - run daytime tcp server.
+    Run: localhost:1200
+    
+RunDaytimeUdpServer - run daytime udp server.
+    Run: localhost:1300    
 
-NetcatChannel - run concurrent tcp client based on go routines and channels.            
+RunMultithreadServer -run multithread server.
+    Run: localhost:1201    
+                 
 ```
 
+Client
+------
+Runs different client
+run: ./main client <client-type>
+
+client-type: 
+   - tcp <host>:<port>
+   - netcat
+   - concurrent 
+   - daytime
+
+**Methods**
+```yaml
+     
+TcpClient - run tcp client
+
+Netcat - run netcat client
+
+NetcatChannel - run concurrent tcp client based on go routines and channels.  
+
+Daytime - run daytime udp client
+          
+```
+
+Network
+---------
+Basic network operations
+run: ./main network <operation> <param><param>
+
+
+operations:
+    - get-mask <ipAddr>
+    - resolve-ip <hostname>
+    - host-lookup <hostname>
+    - port-lookup <protocol> <service>
+    - ping <hostname>
+     
+   
+**Methods**
+```yaml
+GetMask - get mask of ip address
+ResolveIP - get ip address of hostname
+HostLookup - get ip addresses of host
+PortLookup - get port of service
+Ping - send icmp request to host
+```
 
 

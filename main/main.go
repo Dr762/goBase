@@ -2,30 +2,38 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/abondar24/GoBase/basic"
 	reporter "github.com/abondar24/GoBase/issue_reporter"
 	"github.com/abondar24/GoBase/links"
 	"github.com/abondar24/GoBase/server"
 	"gopkg.in/alecthomas/kingpin.v2"
-	"os"
 
-	"github.com/abondar24/GoBase/geometry"
 	"log"
 	"strconv"
+
+	"github.com/abondar24/GoBase/geometry"
+	 "github.com/abondar24/GoBase/network"
+	"github.com/abondar24/GoBase/client"
 )
 
 var (
-	base     = kingpin.New("base", "gobaseDemos")
-	web      = base.Command("web", "Start a new server")
-	servers  = web.Arg("server", "Available servers.").Required().Strings()
-	link     = base.Command("links", "Fetch from url")
-	fetch    = link.Arg("type", "Fetch type").Required().Strings()
-	issues   = base.Command("issues", "Search issues on github")
-	iss      = issues.Arg("type", "Output type").Required().Strings()
-	geom     = base.Command("geometry", "Geometry Demo")
-	points   = geom.Arg("points", "Point coordinates").Required().Strings()
-	basics   = base.Command("basic", "Basic staff")
-	baseArgs = basics.Arg("bases", "Basic features").Required().Strings()
+	base       = kingpin.New("base", "Go base Demos")
+	srv        = base.Command("server", "Start a new server")
+	serverArgs = srv.Arg("server", "Available serverArgs.").Required().Strings()
+	clt        = base.Command("client","Run client")
+	clientArgs = clt.Arg("client","Available clients").Required().Strings()
+	link       = base.Command("links", "Fetch from url")
+	linkArgs   = link.Arg("type", "Fetch type").Required().Strings()
+	issues     = base.Command("issues", "Search issues on github")
+	issuesArgs = issues.Arg("type", "Output type").Required().Strings()
+	geom       = base.Command("geometry", "Geometry Demo")
+	geomArgs   = geom.Arg("points", "Point coordinates").Required().Strings()
+	basics     = base.Command("basic", "Basic staff")
+	baseArgs   = basics.Arg("bases", "Basic features").Required().Strings()
+	ntw        = base.Command("network", "Network examples")
+	netArgs    = ntw.Arg("network","Which example to run").Required().Strings()
 )
 
 func main() {
@@ -39,21 +47,27 @@ func main() {
 		basicRun(*baseArgs)
 
 	case geom.FullCommand():
-		geomRun(*points)
+		geomRun(*geomArgs)
 
 	case issues.FullCommand():
-		issuesRun(*iss)
+		issuesRun(*issuesArgs)
 
 	case link.FullCommand():
-		linksRun(*fetch)
+		linksRun(*linkArgs)
 
-	case web.FullCommand():
-		serverRun(*servers)
+	case srv.FullCommand():
+		serverRun(*serverArgs)
 
+	case clt.FullCommand():
+		clientRun(*clientArgs)
+
+	case ntw.FullCommand():
+		networkRun(*netArgs)
 	}
 
 	os.Exit(0)
 }
+
 
 func basicRun(args []string) {
 	argMap := getArgMap(args)
@@ -148,14 +162,14 @@ func issuesRun(args []string) {
 func linksRun(args []string) {
 	argMap := getArgMap(args)
 
-	if argMap["fetch-console"] {
+	if argMap["linkArgs-console"] {
 		_, err := links.FetchToConsole(os.Args[3:], links.FetchMode)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
 
-	if argMap["fetch-file"] {
+	if argMap["linkArgs-file"] {
 
 		fName, flen, err := links.FetchToFile(os.Args[3])
 		if err != nil {
@@ -165,18 +179,18 @@ func linksRun(args []string) {
 		fmt.Printf("File %v , len %v\n", fName, flen)
 	}
 
-	if argMap["fetch-concurent"] {
+	if argMap["linkArgs-concurent"] {
 
 		links.ConcurentFetcher(os.Args[3:])
 
 	}
 
 	if argMap["links-from-url"] {
-		links, err := links.FindLinksFromUrl(os.Args[3])
+		lnks, err := links.FindLinksFromUrl(os.Args[3])
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(links)
+		fmt.Println(lnks)
 	}
 
 	if argMap["links-from-urls"] {
@@ -185,11 +199,11 @@ func linksRun(args []string) {
 			log.Fatal(err)
 		}
 
-		links, err := links.FindLinks(html)
+		lnks, err := links.FindLinks(html)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(links)
+		fmt.Println(lnks)
 	}
 
 	if argMap["links-breadth"] {
@@ -218,7 +232,7 @@ func linksRun(args []string) {
 func serverRun(args []string) {
 	argMap := getArgMap(args)
 
-	if argMap["web-server"] {
+	if argMap["srv-server"] {
 		server.RunWebServer()
 	}
 
@@ -234,17 +248,69 @@ func serverRun(args []string) {
 		server.RunChatServer()
 	}
 
-	if argMap["client"] {
-		server.Netcat()
-	}
-
-	if argMap["client-concurent"] {
-		server.NetcatChannel()
-	}
-
 	if argMap["rest"] {
 		server.RunRestServer()
 	}
+
+	if argMap["daytime-tcp"] {
+		server.RunDaytimeTcpServer()
+	}
+
+	if argMap["daytime-udp"] {
+		server.RunDaytimeUdpServer()
+	}
+
+	if argMap["multi"] {
+		server.RunMultithreadServer()
+	}
+
+
+
+}
+
+func clientRun(args []string) {
+	argMap := getArgMap(args)
+
+	if argMap["netcat"] {
+		client.Netcat()
+	}
+
+	if argMap["tcp"]{
+		client.TcpClient(os.Args[3])
+	}
+
+	if argMap["concurrent"] {
+		client.NetcatChannel()
+	}
+
+	if argMap["daytime"] {
+		client.DaytimeClient(os.Args[3])
+	}
+}
+
+func networkRun(args []string)  {
+	argMap := getArgMap(args)
+
+	if argMap["get-mask"] {
+		network.GetMask(os.Args[3])
+	}
+
+	if argMap["resolve-ip"]{
+		network.ResolveIP(os.Args[3])
+	}
+
+	if argMap["host-lookup"]{
+		network.HostLookup(os.Args[3])
+	}
+
+	if argMap["port-lookup"]{
+		network.PortLookup(os.Args[3],os.Args[4])
+	}
+
+	if argMap["ping"]{
+		network.Ping(os.Args[3])
+	}
+
 
 }
 
@@ -256,3 +322,4 @@ func getArgMap(args []string) map[string]bool {
 
 	return argMap
 }
+
