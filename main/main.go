@@ -233,38 +233,48 @@ func serverRun(args []string) {
 	argMap := getArgMap(args)
 
 	if argMap["srv-server"] {
-		server.RunWebServer()
+		server.WebServer()
 	}
 
 	if argMap["clock"] {
-		server.RunClockServer()
+		server.ClockServer()
 	}
 
 	if argMap["echo"] {
-		server.RunEchoServer()
+		server.EchoServer()
 	}
 
 	if argMap["chat"] {
-		server.RunChatServer()
+		server.ChatServer()
 	}
 
 	if argMap["rest"] {
-		server.RunRestServer()
+		server.RestServer()
 	}
 
 	if argMap["daytime-tcp"] {
-		server.RunDaytimeTcpServer()
+		server.DaytimeTcpServer()
 	}
 
 	if argMap["daytime-udp"] {
-		server.RunDaytimeUdpServer()
+		server.DaytimeUdpServer()
+	}
+
+	if argMap["daytime-asn1"] {
+		server.DaytimeAsn1Server()
 	}
 
 	if argMap["multi"] {
-		server.RunMultithreadServer()
+		server.MultithreadServer()
 	}
 
+	if argMap["json"] {
+		server.JsonServer()
+	}
 
+	if argMap["gob"] {
+		server.GobServer()
+	}
 
 }
 
@@ -283,9 +293,22 @@ func clientRun(args []string) {
 		client.NetcatChannel()
 	}
 
-	if argMap["daytime"] {
-		client.DaytimeClient(os.Args[3])
+	if argMap["daytime-udp"] {
+		client.DaytimeUdpClient(os.Args[3])
 	}
+
+	if argMap["daytime-asn1"] {
+		client.DaytimeAsn1Client(os.Args[3])
+	}
+
+	if argMap["json"] {
+		client.JsonClient(os.Args[3])
+	}
+
+	if argMap["gob"] {
+		client.GobClient(os.Args[3])
+	}
+
 }
 
 func networkRun(args []string)  {
@@ -311,7 +334,18 @@ func networkRun(args []string)  {
 		network.Ping(os.Args[3])
 	}
 
+	if argMap["asn1"]{
+		network.Asn1Marshall(os.Args[3])
+	}
 
+	if argMap["json"]{
+		network.JsonMarshall()
+	}
+
+
+	if argMap["base64"]{
+		network.Base64Encoder()
+	}
 }
 
 func getArgMap(args []string) map[string]bool {

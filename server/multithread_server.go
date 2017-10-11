@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func RunMultithreadServer(){
+func MultithreadServer(){
 	listener, err := net.Listen("tcp", "localhost:1201")
 	if err != nil {
 		log.Fatal(err)

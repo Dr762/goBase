@@ -177,7 +177,10 @@ server-type:
    - rest
    - daytime-tcp
    - daytime-udp
+   - daytime-asn1
    - multi
+   - json
+   - gob
 
 **Methods**
 ```yaml
@@ -188,16 +191,16 @@ RunWebServer - run web server.
         - draw lissajous: localhost:8000/lissajous  
         - draw fractal: localhost:8000/fractal
 
-RunClockServer - run clock server.
+ClockServer - run clock server.
     Run: localhost:8080
 
-RunEchoServer - run echo server.
+EchoServer - run echo server.
     Run: localhost:5000
 
-RunChatServer - run chat server.
+ChatServer - run chat server.
     Run: localhost:8090
     
-RunRestServer - run rest server.
+RestServer - run rest server.
     Run: localhost:8080
     REST methods: 
       - /getPerson/{person_id}, GET
@@ -207,15 +210,24 @@ RunRestServer - run rest server.
       - /getJobForPerson/{person_id}, GET
       - /insertJob, POST
 
-RunDaytimeTcpServer - run daytime tcp server.
+DaytimeTcpServer - run daytime tcp server.
     Run: localhost:1200
     
-RunDaytimeUdpServer - run daytime udp server.
+DaytimeUdpServer - run daytime udp server.
     Run: localhost:1300    
+    
+DaytimeAsn1Server - run daytime server sending data in asn1 format.
+    Run: localhost:1400    
+    
 
-RunMultithreadServer -run multithread server.
+MultithreadServer -run multithread server.
     Run: localhost:1201    
-                 
+
+JsonServer - run json server.
+    Run: localhost:1500   
+    
+GobServer - run gob server.
+    Run: localhost:1600                 
 ```
 
 Client
@@ -227,7 +239,10 @@ client-type:
    - tcp <host>:<port>
    - netcat
    - concurrent 
-   - daytime
+   - daytime-udp <host>:<port>
+   - daytime-asn1 <host>:<port>
+   - json <host>:<port>
+   - gob <host>:<port>
 
 **Methods**
 ```yaml
@@ -238,7 +253,11 @@ Netcat - run netcat client
 
 NetcatChannel - run concurrent tcp client based on go routines and channels.  
 
-Daytime - run daytime udp client
+DaytimeUdpClient - run daytime udp client
+
+DaytimeAsn1Client - run daytime asn1 client
+
+JsonClient - run json client
           
 ```
 
@@ -254,6 +273,9 @@ operations:
     - host-lookup <hostname>
     - port-lookup <protocol> <service>
     - ping <hostname>
+    - asn1 <value>
+    - json
+    - base64
      
    
 **Methods**
@@ -263,6 +285,9 @@ ResolveIP - get ip address of hostname
 HostLookup - get ip addresses of host
 PortLookup - get port of service
 Ping - send icmp request to host
+Asn1Marschall - marshalls and unmarshalls value to/from byte array
+JsonMarshall - marshalls and unmarshalls value to/from json
+Base64Encoder - encodes and decodes a byte array which consists of 8 digigts
 ```
 
 

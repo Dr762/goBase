@@ -11,7 +11,7 @@ import (
 
 var base = db.Connect()
 
-func RunRestServer() {
+func RestServer() {
 
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", index)

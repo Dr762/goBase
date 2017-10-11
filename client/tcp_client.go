@@ -7,8 +7,8 @@ import (
 	"log"
 )
 
-func TcpClient(service string) {
-	conn,err := net.Dial("tcp",service)
+func TcpClient(server string) {
+	conn,err := net.Dial("tcp", server)
 	if err != nil {
 		log.Fatal(err)
 	}

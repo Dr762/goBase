@@ -4,6 +4,9 @@ import (
 	"net"
 	"fmt"
 	"log"
+	"encoding/asn1"
+	"bytes"
+	"encoding/base64"
 )
 
 func GetMask(ipAddr string) {
@@ -113,4 +116,44 @@ func checkSum(msg []byte) uint16 {
 	var answer uint16 = uint16(^sum)
 
 	return answer
+}
+
+func Asn1Marshall(value string){
+	mdata,err := asn1.Marshal(value)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("After marshal", mdata)
+
+	var v string
+	_,err = asn1.Unmarshal(mdata,&v)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("After unmarshal", v)
+
+}
+
+func Base64Encoder() {
+	array := []byte{1, 2, 3, 4, 5, 6, 7, 8}
+	fmt.Println("Array ",array)
+	bb := &bytes.Buffer{}
+
+	encoder := base64.NewEncoder(base64.StdEncoding, bb)
+	encoder.Write(array)
+	encoder.Close()
+
+	fmt.Println("Encoded", bb)
+
+	dbuf := make([]byte,12)
+	decoder:= base64.NewDecoder(base64.StdEncoding,bb)
+	decoder.Read(dbuf)
+
+	fmt.Println("Decoded")
+	for _, ch := range dbuf {
+		fmt.Print(ch)
+	}
+    fmt.Println()
 }

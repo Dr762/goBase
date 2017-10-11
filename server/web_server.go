@@ -12,7 +12,7 @@ import (
 var count int
 var mu sync.Mutex
 
-func RunWebServer() {
+func WebServer() {
 
 	http.HandleFunc("/", simpleHandler)
 	http.HandleFunc("/count", counter)

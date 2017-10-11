@@ -14,7 +14,7 @@ var (
 	messages = make(chan string) // all client  incoming messages
 )
 
-func RunChatServer() {
+func ChatServer() {
 	listener, err := net.Listen("tcp", "localhost:8090")
 	if err != nil {
 		log.Fatal(err)

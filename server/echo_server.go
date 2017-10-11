@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func RunEchoServer() {
+func EchoServer() {
 	listener, err := net.Listen("tcp", "localhost:5000")
 	if err != nil {
 		log.Fatal(err)

@@ -4,10 +4,13 @@ import (
 	"net"
 	"log"
 	"fmt"
+	"io/ioutil"
+	"time"
+	"encoding/asn1"
 )
 
-func DaytimeClient(service string){
-	udpAddr,err := net.ResolveUDPAddr("udp4",service)
+func DaytimeUdpClient(server string){
+	udpAddr,err := net.ResolveUDPAddr("udp4", server)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -30,4 +33,27 @@ func DaytimeClient(service string){
 	}
 
 	fmt.Println(string(buf[0:n]))
+}
+
+
+func DaytimeAsn1Client(server string) {
+	conn,err := net.Dial("tcp", server)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer conn.Close()
+
+	resp,err:=ioutil.ReadAll(conn)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var newtime time.Time
+	_,err = asn1.Unmarshal(resp,&newtime)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("After marshal/unmarshal: ", newtime.String())
 }
