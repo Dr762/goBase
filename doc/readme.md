@@ -182,6 +182,7 @@ server-type:
    - json
    - gob
    - ftp
+   - utf16
 
 **Methods**
 ```yaml
@@ -231,7 +232,10 @@ GobServer - run gob server.
     Run: localhost:1600  
     
 FtpServer - run ftp server.
-    Run: localhsot:1700                   
+    Run: localhsot:1700   
+    
+Utf16Server - run server which sends message in utf16
+    Run: localhost:1800                    
 ```
 
 Client
@@ -248,6 +252,7 @@ client-type:
    - json <host>:<port>
    - gob <host>:<port>
    - ftp <host>
+   - utf16 <host>:<port>
 
 **Methods**
 ```yaml
@@ -265,6 +270,8 @@ DaytimeAsn1Client - run daytime asn1 client
 JsonClient - run json client
 
 FtpClient - run ftp client
+
+Utf16Client - run client which accepts message in utf16
           
 ```
 

@@ -279,6 +279,10 @@ func serverRun(args []string) {
 	if argMap["ftp"] {
 		server.FtpServer()
 	}
+
+	if argMap["utf16"] {
+		server.Utf16Server()
+	}
 }
 
 func clientRun(args []string) {
@@ -314,6 +318,10 @@ func clientRun(args []string) {
 
 	if argMap["ftp"] {
 		client.FtpClient(os.Args[3])
+	}
+
+	if argMap["utf16"] {
+		client.Utf16Client(os.Args[3])
 	}
 
 }
