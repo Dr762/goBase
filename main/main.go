@@ -276,6 +276,9 @@ func serverRun(args []string) {
 		server.GobServer()
 	}
 
+	if argMap["ftp"] {
+		server.FtpServer()
+	}
 }
 
 func clientRun(args []string) {
@@ -307,6 +310,10 @@ func clientRun(args []string) {
 
 	if argMap["gob"] {
 		client.GobClient(os.Args[3])
+	}
+
+	if argMap["ftp"] {
+		client.FtpClient(os.Args[3])
 	}
 
 }

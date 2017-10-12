@@ -181,6 +181,7 @@ server-type:
    - multi
    - json
    - gob
+   - ftp
 
 **Methods**
 ```yaml
@@ -227,7 +228,10 @@ JsonServer - run json server.
     Run: localhost:1500   
     
 GobServer - run gob server.
-    Run: localhost:1600                 
+    Run: localhost:1600  
+    
+FtpServer - run ftp server.
+    Run: localhsot:1700                   
 ```
 
 Client
@@ -243,6 +247,7 @@ client-type:
    - daytime-asn1 <host>:<port>
    - json <host>:<port>
    - gob <host>:<port>
+   - ftp <host>
 
 **Methods**
 ```yaml
@@ -258,6 +263,8 @@ DaytimeUdpClient - run daytime udp client
 DaytimeAsn1Client - run daytime asn1 client
 
 JsonClient - run json client
+
+FtpClient - run ftp client
           
 ```
 
