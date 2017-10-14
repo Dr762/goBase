@@ -15,6 +15,8 @@ Modules:
 - [Server](#server)
 - [Client](#client)
 - [Network](#network)
+- [Security](#security)
+
 
 Overview
 --------
@@ -183,6 +185,7 @@ server-type:
    - gob
    - ftp
    - utf16
+   - tls
 
 **Methods**
 ```yaml
@@ -235,7 +238,10 @@ FtpServer - run ftp server.
     Run: localhsot:1700   
     
 Utf16Server - run server which sends message in utf16
-    Run: localhost:1800                    
+    Run: localhost:1800    
+    
+TlsServer - run server with x509 certificate(certificate requrired)
+    Run: localhost:1900                    
 ```
 
 Client
@@ -253,6 +259,7 @@ client-type:
    - gob <host>:<port>
    - ftp <host>
    - utf16 <host>:<port>
+   - tls <host>:<port>
 
 **Methods**
 ```yaml
@@ -272,6 +279,8 @@ JsonClient - run json client
 FtpClient - run ftp client
 
 Utf16Client - run client which accepts message in utf16
+
+TlsClient - run client to connect to tls server
           
 ```
 
@@ -303,5 +312,31 @@ Asn1Marschall - marshalls and unmarshalls value to/from byte array
 JsonMarshall - marshalls and unmarshalls value to/from json
 Base64Encoder - encodes and decodes a byte array which consists of 8 digigts
 ```
+
+Security
+---------
+Basic security examples related to network
+run: ./main security <example> <param><param>
+
+
+examples:
+    - md5 <string>
+    - blowfish <string>
+    - gen-rsa
+    - load-rsa
+    - x509-gen
+    - x509-load
+     
+        
+**Methods**
+```yaml
+Md5Hash - calculates and outputs hashvalue of incoming string
+BlowFish - uses blofish to encode/decode string
+GenRsaKey - generates a rsa key and saves to the file
+LoadRsaKey - loads a rsa kay from file(you need to have private.key and public.key files)
+GenX509 - generates a new x509 certificate based on private.key
+LoadX509 - loads and parses x509 certificate
+```
+
 
 

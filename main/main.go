@@ -14,16 +14,17 @@ import (
 	"strconv"
 
 	"github.com/abondar24/GoBase/geometry"
-	 "github.com/abondar24/GoBase/network"
+	"github.com/abondar24/GoBase/network"
 	"github.com/abondar24/GoBase/client"
+	"github.com/abondar24/GoBase/security"
 )
 
 var (
 	base       = kingpin.New("base", "Go base Demos")
 	srv        = base.Command("server", "Start a new server")
 	serverArgs = srv.Arg("server", "Available serverArgs.").Required().Strings()
-	clt        = base.Command("client","Run client")
-	clientArgs = clt.Arg("client","Available clients").Required().Strings()
+	clt        = base.Command("client", "Run client")
+	clientArgs = clt.Arg("client", "Available clients").Required().Strings()
 	link       = base.Command("links", "Fetch from url")
 	linkArgs   = link.Arg("type", "Fetch type").Required().Strings()
 	issues     = base.Command("issues", "Search issues on github")
@@ -33,7 +34,9 @@ var (
 	basics     = base.Command("basic", "Basic staff")
 	baseArgs   = basics.Arg("bases", "Basic features").Required().Strings()
 	ntw        = base.Command("network", "Network examples")
-	netArgs    = ntw.Arg("network","Which example to run").Required().Strings()
+	netArgs    = ntw.Arg("network", "Which example to run").Required().Strings()
+	sec        = base.Command("security", "Security staff")
+	secArgs    = sec.Arg("security", "Security example").Required().Strings()
 )
 
 func main() {
@@ -63,11 +66,13 @@ func main() {
 
 	case ntw.FullCommand():
 		networkRun(*netArgs)
+
+	case sec.FullCommand():
+		securityRun(*secArgs)
 	}
 
 	os.Exit(0)
 }
-
 
 func basicRun(args []string) {
 	argMap := getArgMap(args)
@@ -283,6 +288,11 @@ func serverRun(args []string) {
 	if argMap["utf16"] {
 		server.Utf16Server()
 	}
+
+	if argMap["tls"] {
+		server.TlsServer()
+	}
+
 }
 
 func clientRun(args []string) {
@@ -292,7 +302,7 @@ func clientRun(args []string) {
 		client.Netcat()
 	}
 
-	if argMap["tcp"]{
+	if argMap["tcp"] {
 		client.TcpClient(os.Args[3])
 	}
 
@@ -324,43 +334,76 @@ func clientRun(args []string) {
 		client.Utf16Client(os.Args[3])
 	}
 
+	if argMap["tls"] {
+		client.TlsClient(os.Args[3])
+	}
+
 }
 
-func networkRun(args []string)  {
+func networkRun(args []string) {
 	argMap := getArgMap(args)
 
 	if argMap["get-mask"] {
 		network.GetMask(os.Args[3])
 	}
 
-	if argMap["resolve-ip"]{
+	if argMap["resolve-ip"] {
 		network.ResolveIP(os.Args[3])
 	}
 
-	if argMap["host-lookup"]{
+	if argMap["host-lookup"] {
 		network.HostLookup(os.Args[3])
 	}
 
-	if argMap["port-lookup"]{
-		network.PortLookup(os.Args[3],os.Args[4])
+	if argMap["port-lookup"] {
+		network.PortLookup(os.Args[3], os.Args[4])
 	}
 
-	if argMap["ping"]{
+	if argMap["ping"] {
 		network.Ping(os.Args[3])
 	}
 
-	if argMap["asn1"]{
+	if argMap["asn1"] {
 		network.Asn1Marshall(os.Args[3])
 	}
 
-	if argMap["json"]{
+	if argMap["json"] {
 		network.JsonMarshall()
 	}
 
-
-	if argMap["base64"]{
+	if argMap["base64"] {
 		network.Base64Encoder()
 	}
+}
+
+func securityRun(args []string){
+	argMap := getArgMap(args)
+
+	if argMap["md5"] {
+		security.Md5Hash(os.Args[3])
+	}
+
+	if argMap["blowfish"] {
+		security.BlowFish(os.Args[3])
+	}
+
+	if argMap["gen-rsa"] {
+		security.GenRsaKey()
+	}
+
+	if argMap["load-rsa"] {
+		security.LoadRsaKey()
+	}
+
+
+	if argMap["x509-gen"] {
+		security.GenX509()
+	}
+
+	if argMap["x509-load"] {
+		security.LoadX509()
+	}
+
 }
 
 func getArgMap(args []string) map[string]bool {
@@ -371,4 +414,3 @@ func getArgMap(args []string) map[string]bool {
 
 	return argMap
 }
-
