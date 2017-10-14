@@ -7,6 +7,10 @@ import (
 	"encoding/asn1"
 	"bytes"
 	"encoding/base64"
+	"net/http"
+	"os"
+	"net/http/httputil"
+	"strings"
 )
 
 func GetMask(ipAddr string) {
@@ -156,4 +160,62 @@ func Base64Encoder() {
 		fmt.Print(ch)
 	}
     fmt.Println()
+}
+
+func ReadHttpHeader(url string){
+	response,err := http.Head(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(response.Status)
+	for k,v := range response.Header{
+		fmt.Println(k+":",v)
+	}
+
+}
+
+func ReadHttpGet(url string){
+	response,err := http.Get(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if response.Status!="200 OK"{
+		fmt.Println(response.Status)
+		os.Exit(2)
+	}
+
+	b,_ := httputil.DumpResponse(response,false)
+	fmt.Print(string(b))
+
+	contentTypes := response.Header["Content-Type"]
+	if !acceptableCharset(contentTypes){
+		fmt.Println("Can't handle",contentTypes)
+		os.Exit(4)
+	}
+
+
+	var buf [512]byte
+	reader := response.Body
+	for {
+		n, err := reader.Read(buf[0:])
+		if err != nil {
+			os.Exit(0)
+		}
+		fmt.Print(string(buf[0:n]))
+	}
+	os.Exit(0)
+
+}
+
+
+func acceptableCharset(contentTypes []string) bool {
+  for _,cType := range contentTypes{
+  	if strings.Index(cType,"UTF-8") != -1{
+  		return  true
+	}
+  }
+
+  return false
 }

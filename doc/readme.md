@@ -186,6 +186,7 @@ server-type:
    - ftp
    - utf16
    - tls
+   - file
 
 **Methods**
 ```yaml
@@ -241,7 +242,10 @@ Utf16Server - run server which sends message in utf16
     Run: localhost:1800    
     
 TlsServer - run server with x509 certificate(certificate requrired)
-    Run: localhost:1900                    
+    Run: localhost:1900      
+    
+FileServer - run fileserver
+    Run: localhost:2000                      
 ```
 
 Client
@@ -260,6 +264,7 @@ client-type:
    - ftp <host>
    - utf16 <host>:<port>
    - tls <host>:<port>
+   - http <host>
 
 **Methods**
 ```yaml
@@ -281,6 +286,8 @@ FtpClient - run ftp client
 Utf16Client - run client which accepts message in utf16
 
 TlsClient - run client to connect to tls server
+
+HttpClient - run a http client
           
 ```
 
@@ -299,6 +306,9 @@ operations:
     - asn1 <value>
     - json
     - base64
+    - http-header <url>
+    - http-get <url>
+    
      
    
 **Methods**
@@ -311,6 +321,8 @@ Ping - send icmp request to host
 Asn1Marschall - marshalls and unmarshalls value to/from byte array
 JsonMarshall - marshalls and unmarshalls value to/from json
 Base64Encoder - encodes and decodes a byte array which consists of 8 digigts
+ReadHttpHeader - reades headers of http response
+ReadHttpGet - make a get request to url
 ```
 
 Security

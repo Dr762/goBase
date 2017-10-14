@@ -293,6 +293,9 @@ func serverRun(args []string) {
 		server.TlsServer()
 	}
 
+	if argMap["file"] {
+		server.FileServer()
+	}
 }
 
 func clientRun(args []string) {
@@ -338,6 +341,9 @@ func clientRun(args []string) {
 		client.TlsClient(os.Args[3])
 	}
 
+	if argMap["http"] {
+		client.HttpClient(os.Args[3])
+	}
 }
 
 func networkRun(args []string) {
@@ -374,9 +380,17 @@ func networkRun(args []string) {
 	if argMap["base64"] {
 		network.Base64Encoder()
 	}
+
+	if argMap["http-header"] {
+		network.ReadHttpHeader(os.Args[3])
+	}
+
+	if argMap["http-get"] {
+		network.ReadHttpGet(os.Args[3])
+	}
 }
 
-func securityRun(args []string){
+func securityRun(args []string) {
 	argMap := getArgMap(args)
 
 	if argMap["md5"] {
@@ -394,7 +408,6 @@ func securityRun(args []string){
 	if argMap["load-rsa"] {
 		security.LoadRsaKey()
 	}
-
 
 	if argMap["x509-gen"] {
 		security.GenX509()
