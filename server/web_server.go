@@ -14,7 +14,8 @@ var mu sync.Mutex
 
 func WebServer() {
 
-	http.HandleFunc("/", simpleHandler)
+	http.Handle("/", http.FileServer(http.Dir("./../server/html")))
+	http.HandleFunc("/headers",simpleHandler)
 	http.HandleFunc("/count", counter)
 	http.HandleFunc("/lissajous", func(w http.ResponseWriter, r *http.Request) { lissajous.Lissajous(w) })
 	http.HandleFunc("/fractal", func(w http.ResponseWriter, r *http.Request) { basic.DrawFractal(w) })

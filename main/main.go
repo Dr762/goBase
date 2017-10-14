@@ -237,7 +237,7 @@ func linksRun(args []string) {
 func serverRun(args []string) {
 	argMap := getArgMap(args)
 
-	if argMap["srv-server"] {
+	if argMap["web"] {
 		server.WebServer()
 	}
 

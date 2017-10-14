@@ -21,7 +21,6 @@ const (
 )
 
 func Lissajous(out io.Writer) {
-	const ()
 
 	freq := rand.Float64() * 3.0 // frequence of y oscilator
 	anim := gif.GIF{LoopCount: nframes}
