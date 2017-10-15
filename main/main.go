@@ -302,6 +302,18 @@ func serverRun(args []string) {
 	if argMap["file"] {
 		server.FileServer()
 	}
+
+	if argMap["rpc-http"] {
+		server.HttpRpcServer()
+	}
+
+	if argMap["rpc-tcp"] {
+		server.TcpRpcServer()
+	}
+
+	if argMap["rpc-json"] {
+		server.JsonRpcServer()
+	}
 }
 
 func clientRun(args []string) {
@@ -349,6 +361,19 @@ func clientRun(args []string) {
 
 	if argMap["http"] {
 		client.HttpClient(os.Args[3])
+	}
+
+
+	if argMap["rpc-http"] {
+		client.HttpRpcClient(os.Args[3])
+	}
+
+	if argMap["rpc-tcp"] {
+		client.TcpRpcClient(os.Args[3])
+	}
+
+	if argMap["rpc-json"] {
+		client.JsonRpcClient(os.Args[3])
 	}
 }
 

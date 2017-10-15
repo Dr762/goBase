@@ -188,6 +188,9 @@ server-type:
    - utf16
    - tls
    - file
+   - rpc-http
+   - rpc-tcp
+   - rpc-json
 
 **Methods**
 ```yaml
@@ -246,7 +249,16 @@ TlsServer - run server with x509 certificate(certificate requrired)
     Run: localhost:1900      
     
 FileServer - run fileserver
-    Run: localhost:2000                      
+    Run: localhost:2000    
+    
+HttpRpcServer - run http-based rpc server
+    Run: localhost:2100
+    
+TcpRpcServer - run tcp-based rpc server
+    Run: localhost:2200   
+     
+JsonRpcServer - run json rpc server
+    Run: localhost:2300                    
 ```
 
 Client
@@ -266,6 +278,9 @@ client-type:
    - utf16 <host>:<port>
    - tls <host>:<port>
    - http <host>
+   - rpc-http <host>:<port>
+   - rpc-tcp <host>:<port>
+   - rpc-json <host>:<port>
 
 **Methods**
 ```yaml
@@ -289,7 +304,12 @@ Utf16Client - run client which accepts message in utf16
 TlsClient - run client to connect to tls server
 
 HttpClient - run a http client
-          
+
+HttpRpcClient - run a http rpc client
+
+TcpRpcClient - run a tcp rpc client
+
+JsonRpcClient - run a json rpc client          
 ```
 
 Network
