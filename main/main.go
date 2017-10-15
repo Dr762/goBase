@@ -17,6 +17,7 @@ import (
 	"github.com/abondar24/GoBase/network"
 	"github.com/abondar24/GoBase/client"
 	"github.com/abondar24/GoBase/security"
+	"github.com/abondar24/GoBase/xmlDemo"
 )
 
 var (
@@ -37,6 +38,8 @@ var (
 	netArgs    = ntw.Arg("network", "Which example to run").Required().Strings()
 	sec        = base.Command("security", "Security staff")
 	secArgs    = sec.Arg("security", "Security example").Required().Strings()
+	xmlCmd        = base.Command("xml", "XML demos")
+	xmlArgs    = xmlCmd.Arg("xml", "XML demos").Required().Strings()
 )
 
 func main() {
@@ -69,6 +72,9 @@ func main() {
 
 	case sec.FullCommand():
 		securityRun(*secArgs)
+
+	case xmlCmd.FullCommand():
+		xmlRun(*xmlArgs)
 	}
 
 	os.Exit(0)
@@ -418,6 +424,19 @@ func securityRun(args []string) {
 	}
 
 }
+
+func xmlRun(args []string) {
+	argMap := getArgMap(args)
+
+	if argMap["parse"] {
+		xmlDemo.ParseXML(os.Args[3])
+	}
+
+	if argMap["unmarshal"]{
+		xmlDemo.UnmarshalXML(os.Args[3])
+	}
+}
+
 
 func getArgMap(args []string) map[string]bool {
 	argMap := map[string]bool{}

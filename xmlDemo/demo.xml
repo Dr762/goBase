@@ -1,0 +1,12 @@
+<person>
+    <name>
+        <family>Bondar</family>
+        <personal>Alex</personal>
+    </name>
+    <email type="personal">
+        desertalex@icloud.com
+    </email>
+    <email type="work">
+        abondar@work.com
+    </email>
+</person>

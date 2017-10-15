@@ -16,6 +16,7 @@ Modules:
 - [Client](#client)
 - [Network](#network)
 - [Security](#security)
+- [XML](#xml)
 
 
 Overview
@@ -350,5 +351,22 @@ GenX509 - generates a new x509 certificate based on private.key
 LoadX509 - loads and parses x509 certificate
 ```
 
+
+XML
+---------
+XML related examples
+run: ./main xml <example> <param><param>
+
+
+examples:
+    - parse <file>
+    - unmarshal <file>
+     
+        
+**Methods**
+```yaml
+ParseXML - parses incoming file and shows its tree
+UnmarshalXML - unmarshals xml to struct
+```
 
 
