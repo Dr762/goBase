@@ -191,6 +191,9 @@ server-type:
    - rpc-http
    - rpc-tcp
    - rpc-json
+   - websocket
+   - websocket-json
+   - websocket-xml
 
 **Methods**
 ```yaml
@@ -258,7 +261,16 @@ TcpRpcServer - run tcp-based rpc server
     Run: localhost:2200   
      
 JsonRpcServer - run json rpc server
-    Run: localhost:2300                    
+    Run: localhost:2300    
+
+WebSocketServer - run websocket server
+    Run: localhost:2400 
+    
+WebSocketJsonServer - run websocket server which accepts data in json
+    Run: localhost:2500     
+    
+WebSocketXmlServer - run websocket server which accepts data in xml
+    Run: localhost:2600                         
 ```
 
 Client
@@ -281,6 +293,9 @@ client-type:
    - rpc-http <host>:<port>
    - rpc-tcp <host>:<port>
    - rpc-json <host>:<port>
+   - websocket <host>:<port> <message>
+   - websocket-json <host>:<port>
+   - websocket-xml <host>:<port>
 
 **Methods**
 ```yaml
@@ -309,7 +324,14 @@ HttpRpcClient - run a http rpc client
 
 TcpRpcClient - run a tcp rpc client
 
-JsonRpcClient - run a json rpc client          
+JsonRpcClient - run a json rpc client 
+
+WebSocketClient - run a websocket client which sends a message
+
+WebSocketJsonClient - run a websocket client which sends data in json
+
+WebSocketXmlClient - run a websocket client which sends data in xml
+         
 ```
 
 Network

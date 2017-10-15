@@ -314,6 +314,18 @@ func serverRun(args []string) {
 	if argMap["rpc-json"] {
 		server.JsonRpcServer()
 	}
+
+	if argMap["websocket"] {
+		server.WebSocketServer()
+	}
+
+	if argMap["websocket-json"] {
+		server.WebSocketJsonServer()
+	}
+
+	if argMap["websocket-xml"] {
+		server.WebSocketXmlServer()
+	}
 }
 
 func clientRun(args []string) {
@@ -374,6 +386,18 @@ func clientRun(args []string) {
 
 	if argMap["rpc-json"] {
 		client.JsonRpcClient(os.Args[3])
+	}
+
+	if argMap["websocket"] {
+		client.WebSocketClient(os.Args[3],os.Args[4])
+	}
+
+	if argMap["websocket-json"] {
+		client.WebSocketJsonClient(os.Args[3])
+	}
+
+	if argMap["websocket-xml"] {
+		client.WebSocketXmlClient(os.Args[3])
 	}
 }
 
