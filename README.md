@@ -1,7 +1,7 @@
 # GoBase
 Basic GoLang staff
 
-Steps before clone and run
+Steps before clone and run with older Go version
 
 1. If you have no projects on go create any dir
 2. Create subfolder bin,src,pkg
